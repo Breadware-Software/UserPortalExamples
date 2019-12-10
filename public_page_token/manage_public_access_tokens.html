@@ -1,0 +1,61 @@
+<style>
+    tr {
+        cursor: pointer;
+    }
+</style>
+<div ng-controller="CustomManagePublicTokensController as ctr" >
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-9">
+            <h2>Manage Public Access Tokens</h2>
+        </div>
+        <div class="col-lg-2 form-group" style="margin-top: 20px;">
+            <button type="button" class="btn btn-labeled btn-success"
+                    id="gen-new-tokens-btn"
+                    ng-click="ctr.generate_new_token()">Generate New Token</button>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="container-fluid ng-scope">
+
+                    <div class="row">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content" style="overflow-x:auto; border-top: none;">
+                                <h4 ng-if="!ctr.loaded">Loading...</h4>
+                                <div class="animated fadeInDown" ng-if="ctr.loaded">
+                                    <table ng-if="ctr.loaded"
+                                           class="table table-striped mv-lg"
+                                        style="width:100%">
+
+                                        <thead>
+                                            <tr>
+                                                <th class="col-sm-10">Token</th>
+                                                <th class="col-sm-2"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="row in ctr.table.data">
+                                                <td ng-repeat="field in ctr.table.fields"
+                                                    onmouseover="this.bgColor='#f0f0f0'"
+                                                    onmouseout="this.bgColor='transparent'">
+                                                    {{row[field]}}
+                                                </td>
+                                                <td class="btn btn-danger"
+                                                    style="margin-top: 5px;"
+                                                    ng-click="ctr.revoke_token($index)">Revoke token</td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
